@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnGallery :Button
     lateinit var btnFinish : Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

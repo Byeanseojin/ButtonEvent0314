@@ -4,9 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Gallery
 import android.widget.Toast
+import java.util.EventListener
 
 class MainActivity : AppCompatActivity() {
     lateinit var btn : Button
@@ -14,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var btn911 :Button
     lateinit var btnGallery :Button
     lateinit var btnFinish : Button
-
+    lateinit var btnListener: View.OnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,18 @@ class MainActivity : AppCompatActivity() {
         btn911 = findViewById(R.id.button911)
         btnGallery = findViewById(R.id.buttonGallery)
         btnFinish = findViewById(R.id.buttonFinish)
+
+        btnListener = View.OnClickListener {//it은 이벤트가 발생된 버튼객체의 참조값
+            when(it.id){
+                R.id.buttonHome -> intent = Intent(Intent.ACTION_VIEW,  Uri.parse("https://www.kopo.ac.kr/jungsu/index.do"))
+                R.id.button911 -> Intent(Intent.ACTION_VIEW,  Uri.parse("tel:/911"))
+                R.id.buttonGallery-> intent = Intent(Intent.ACTION_VIEW,  Uri.parse("content://media/internal/images/media"))
+            }
+            startActivity(intent)
+        }
+        btnHome.setOnClickListener(btnListener)
+        btn911.setOnClickListener(btnListener)
+        btnGallery.setOnClickListener(btnListener)
 
         btnHome.setOnClickListener {
             var intent = Intent(Intent.ACTION_VIEW,  Uri.parse("https://www.kopo.ac.kr/jungsu/index.do"))
